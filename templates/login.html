@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Page de connexion</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+      <h1>Se connecter</h1>
+      <form action="{{ url_for('login') }}" method="POST">
+          <label>Adresse mail :</label>
+          <input type="email" name="email" placeholder="Entrez votre email" required>
+          
+          <label>Mot de passe :</label>
+          <input type="password" name="password" placeholder="Entrez votre mot de passe" required>
+          
+          <label>Code PIN :</label>
+          <input type="password" name="pin" placeholder="Entrez votre code PIN" required>
+          
+          <button type="submit">Connexion</button>
+      </form>
+
+      <p>Pas encore de compte ? <a href="{{ url_for('register') }}">Créer un compte</a></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

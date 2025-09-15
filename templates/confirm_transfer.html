@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Confirmation de virement</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+      <h2>Confirmer votre virement</h2>
+      <p>Numéro de compte du destinataire : {{ pending['recipient_account'] }}</p>
+      <p>Destinataire : {{ pending['recipient_name'] }}</p>
+      <p>Montant : {{ pending['amount'] }} €</p>
+
+      <form action="{{ url_for('confirm_transfer') }}" method="POST">
+          <label>Entrez votre code PIN :</label>
+          <input type="password" name="pin" maxlength="4" placeholder="XXXX" required>
+          
+          <button type="submit" name="action" value="confirm">Confirmer</button>
+          <button type="submit" name="action" value="cancel">Annuler</button>
+      </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

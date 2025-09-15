@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Paiement Facture</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    
+    <div class="form-container">
+      <h2>Payer une facture</h2>
+      <form action="{{ url_for('pay_bill') }}" method="POST">
+          <label>Fournisseur :</label>
+          <select name="recipient" required>
+              <option value="" disabled selected>-- Sélectionnez votre fournisseur --</option>
+              <option value="yas_togo">Yas Togo</option>
+              <option value="canal_box_togo">CanalBox Togo</option>
+              <option value="ceet">CEET</option>
+              <option value="tde">TDE</option>
+          </select><br><br>
+
+          <label>Montant :</label>
+          <input type="number" name="amount" step="0.01" placeholder="Entrez le montant à payer" required><br><br>
+          <button type="submit">Suivant</button>
+          <a href="{{ url_for('dashboard') }}" class="button">Annuler</a>
+
+      </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

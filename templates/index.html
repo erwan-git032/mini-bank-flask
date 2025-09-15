@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue - Ma Banque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+
+    <div class="index-container">
+        <h1>Bienvenue sur Axel_Bank, la première banque exclusivement Togolaise !</h1>
+        <p>Gérez vos comptes et vos transactions en toute sécurité.</p>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Virements rapides</h3>
+                <p>Envoyez de l'argent en quelques secondes vers tout autre compte.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Paiement de factures</h3>
+                <p>Payer vos factures facilement depuis votre espace personnel.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Suivi des transactions</h3>
+                <p>Consultez votre historique et suivez vos dépenses en temps réel.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Dépôts sécurisés</h3>
+                <p>Effectuez vos dépôts en toute sécurité directement depuis l’application.</p>
+            </div>
+        </div>
+    </div>
+
+        <div class="index-buttons">
+            <a href="/login"><button>Se connecter</button></a>
+            <a href="/register"><button>S'inscrire</button></a>
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Panneau de bord</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+
+
+    <h1>Bienvenue {{user.first_name}} {{user.last_name}} </h1>
+    <p>Numéro de compte : {{user.account_number}} </p>
+    <p>Solde : {{user.balance}} FCFA</p>
+    <div class="menu">
+        <a href="/transfer_page"><button>Virement</button></a>
+        <a href="/pay_bill_page"><button>Payer Facture</button></a>
+        <a href="/logout"><button>Déconnexion</button></a>
+        <a href="/deposit_page"><button>Dépôt</button></a>
+        <a href="/"><button>Page d'accueil</button></a>
+    </div>
+
+    <input type="text" id="search_id" placeholder="Rechercher par ID">
+    <button id="search_btn">Rechercher</button>
+    <div id="search_results"></div>
+
+
+    <h2>Historique des transactions :</h2>
+    <table border="1">
+        <tr>
+            <th>ID Transaction</th>
+            <th>Type</th>
+            <th>Montant</th>
+            <th>Date</th>
+            <th>Destinataire</th>
+        </tr>
+        {% if transactions %}
+            {% for t in transactions %}
+            <tr>
+                <td>{{ t.transaction_id }}</td>
+                <td>{{ t.type }}</td>
+                <td>{{ t.amount }}</td>
+                <td>{{ t.date.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td>{{ t.recipient or '-' }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <p>Aucune transaction pour le moment.</p>
+        {% endif %}
+    </table>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
