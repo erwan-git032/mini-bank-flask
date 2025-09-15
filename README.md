@@ -26,7 +26,7 @@ Permet de créer un compte, se connecter, consulter solde/historique, et gérer 
 1. Cloner le projet :
 
 ```bash
-git clone https://github.com/AXELATAYI/mini-banque-flask.git
+git clone https://github.com/erwan-git032/mini-bank-flask.git
 cd mini-banque-flask
 ````
 
@@ -112,6 +112,6 @@ python init_db.py
 ## Auteur
 
 Axel ATAYI
-GitHub : [https://github.com/AXELATAYI](https://github.com/AXELATAYI)
+GitHub : [https://github.com/erwan-git032](https://github.com/erwan-git032)
 
 ```
